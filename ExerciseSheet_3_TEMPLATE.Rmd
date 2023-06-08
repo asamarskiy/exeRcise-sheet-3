@@ -118,6 +118,56 @@ b)  Load the data for both years into R. Check the type of the count
     some of the counts are inaccurate because of this. Explain your
     solution and the repercussions.
 
+    ```{r}
+    library(tidyverse)
+
+    nam21 <- read_csv("data/vornamen_2021.csv")
+    nam22 <- read_csv("data/open_data_portal_2022.csv")
+
+    typeof(nam21$Anzahl)
+    typeof(nam22$Anzahl)
+    ```
+
+    The data contain some entries of the following form:
+
+    ```{r}
+    nam22$Anzahl[495]
+    ```
+
+    Since names that appear four times or less contain non-numeric
+    characters, the entire variable "Anzahl" receives the type
+    character.
+
+    For this cases, I assume (arbitrarily) that the average count within
+    the "less than 4" subset is 2. This motivates the following
+    transformations.
+
+    ```{r}
+    nam21 <- nam21 %>% mutate(Anzahl = str_replace(Anzahl, "4 oder weniger", "2")) %>% 
+            mutate(Anzahl = as.numeric(Anzahl))
+
+    nam22 <- nam21 %>% mutate(Anzahl = str_replace(Anzahl, "4 oder weniger", "2")) %>% 
+            mutate(Anzahl = as.numeric(Anzahl))
+    ```
+
+    *Discussion*. The solution successfully transforms the variable
+    types.
+
+    ```{r}
+    typeof(nam21$Anzahl)
+    typeof(nam22$Anzahl)
+    ```
+
+    But I essentially guess the count of rare names (≤ 4) by setting it
+    equal to 2 in all cases. This arbitrary assumption is problematic
+    since rare names make up the majority of given names (more than 80%
+    in 2021):
+
+    ```{r}
+    nam21 <- nam21 %>% mutate(rare = ifelse(Anzahl == 2, 1, 0))
+    sum(nam21$rare)/length(nam21$rare)
+    ```
+
 c)  Calculate the total number of babies born in Munich in 2022
     and 2021. Which year had the bigger baby-boom?
 
