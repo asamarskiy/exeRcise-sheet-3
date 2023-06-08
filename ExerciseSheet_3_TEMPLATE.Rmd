@@ -53,6 +53,23 @@ c)  For all of the following tasks in this exercise sheet we ask you to
 d)  Name 2 strengths and 2 weaknesses of git. (Don't forget to create a
     commit after this answer, see *1c*)
 
+    *Strengths*: 
+
+    1\) Works as a back-up tool to ensure that you can always regain
+    access to a lost file or correct unwanted changes.
+
+    2\) Facilitates collaboration across devices (no more sending
+    scripts back and forth). Also allows a straightforward
+    identification of the changes your colleagues made.
+
+    *Weaknesses*:
+
+    1\) A file's history requires additional storage (albeit very
+    little).
+
+    2\) Doesn't work well with binary files (e.g., PDFs) and large data
+    sets.
+
 e)  Knit this exercise sheet. Some new files will automatically be
     generated when knitting the sheet e.g. the HTML page. Ignore these
     files, as we only want to track the source files themselves.
