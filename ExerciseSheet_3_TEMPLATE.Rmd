@@ -146,7 +146,7 @@ b)  Load the data for both years into R. Check the type of the count
     nam21 <- nam21 %>% mutate(Anzahl = str_replace(Anzahl, "4 oder weniger", "2")) %>% 
             mutate(Anzahl = as.numeric(Anzahl))
 
-    nam22 <- nam21 %>% mutate(Anzahl = str_replace(Anzahl, "4 oder weniger", "2")) %>% 
+    nam22 <- nam22 %>% mutate(Anzahl = str_replace(Anzahl, "4 oder weniger", "2")) %>% 
             mutate(Anzahl = as.numeric(Anzahl))
     ```
 
@@ -164,12 +164,18 @@ b)  Load the data for both years into R. Check the type of the count
     in 2021):
 
     ```{r}
-    nam21 <- nam21 %>% mutate(rare = ifelse(Anzahl == 2, 1, 0))
-    sum(nam21$rare)/length(nam21$rare)
+    placeh <- nam21 %>% mutate(rare = ifelse(Anzahl == 2, 1, 0))
+    sum(placeh$rare)/length(placeh$rare)
     ```
 
 c)  Calculate the total number of babies born in Munich in 2022
     and 2021. Which year had the bigger baby-boom?
+
+    ```{r}
+    c(sum(nam21$Anzahl), sum(nam22$Anzahl))
+    ```
+
+    2021 had more births in Munich take place.
 
 d)  Add a new column `year` to both datasets which holds the correct
     year for each.
