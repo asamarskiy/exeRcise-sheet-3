@@ -180,6 +180,11 @@ c)  Calculate the total number of babies born in Munich in 2022
 d)  Add a new column `year` to both datasets which holds the correct
     year for each.
 
+    ```{r}
+    nam21 <- nam21 %>% mutate(year = 2021)
+    nam22 <- nam22 %>% mutate(year = 2022)
+    ```
+
 e)  Combine both datasets into one using `bind_rows()`.
 
 f)  Combine the counts for same names to determine the most popular
