@@ -99,6 +99,8 @@ b)  Push your code to this new repository by copying and executing the
 c)  Regularly push your latest changes to GitHub again and especially do
     so when you are finished with this sheet.
 
+    Text for push test
+
 ## Exercise 3: Baby-Names in Munich (4.5 Points)
 
 Download the latest open datasets on given names ("Vornamen") from the
