@@ -227,6 +227,94 @@ column_means \<- lapply(tax_data\[, -1\], 2, mean)
 
 column_means
 
+*Prompt*: I'll send you an R code chunk. There is a mistake because the
+wrong apply function has been used. Correct the mistake and explain it.
+Here's where it gets tricky: You can only replace the lapply function.
+The replacement must come from the apply() function collection. Further,
+you must keep its arguments (tax_data\[, -1\], 2, mean) unchanged. DO
+NOT CHANGE THE ARGUMENTS UNDER ANY CIRCUMSTANCES. The code is correct
+except for the function being used.
+
+*No matter what I write, ChatGPT always fiddles with the arguments when
+suggesting a different function. The above prompt worked only with this
+follow-up:*
+
+*Prompt*: Have you tried replacing lapply with apply?
+
+*Response*: Apologies for the oversight. To replace `lapply()` with a
+function from the `apply()` family, we can use `apply()` in combination
+with the `MARGIN` argument set to 2 to calculate column-wise means.
+Here's the corrected code using `apply()`:
+
+```{r}
+# Create a sample data frame
+tax_data <- data.frame(
+  Name = c("Munich GmbH", "ABC Inc.", "Backpacks 1980", "Bavarian Circus"),
+  Tax_2019 = c(5000, 4000, 6000, 3500),
+  Tax_2020 = c(4800, 4200, 5800, 3700),
+  Tax_2021 = c(5200, 3800, 5900, 3400)
+)
+
+# Calculate column-wise means using apply()
+column_means <- apply(tax_data[, -1], 2, mean)
+
+column_means
+```
+
+In this code, `apply()` is used with `tax_data[, -1]` as the first
+argument to specify the data frame from which the column-wise means
+should be calculated. The `2` argument indicates that the calculation
+should be performed on each column. Finally, `mean`
+is used as the third argument to specify the function to apply to each
+column. The result will be a vector of column means stored in the
+`column_means` variable.
+
+*Prompt:* So, what was the mistake in the original code?
+
+*Response*: The mistake in the original code was the incorrect usage of
+the `lapply()` function. The second argument of `lapply()` is expected
+to be a function, but the value `2` was provided instead. The correct
+usage of `lapply()` should be:
+
+lapply(X, FUN, ...)
+
+Where `X` is the input data structure and `FUN` is the function to be
+applied to each element of `X`. In the original code, the argument `2`
+was used instead of a function, resulting in an error.
+
+*Prompt:* How would you calculate the rowwise means?
+
+*Response*: suggested `rowMeans()`
+
+*Prompt:* Can you use an alternative solution?
+
+*Response*: Certainly! An alternative solution to calculate the row-wise
+means is by using the `apply()` function with `MARGIN = 1`. Here's the
+modified code using `apply()`:
+
+```{r}
+# Create a sample data frame
+tax_data <- data.frame(
+  Name = c("Munich GmbH", "ABC Inc.", "Backpacks 1980", "Bavarian Circus"),
+  Tax_2019 = c(5000, 4000, 6000, 3500),
+  Tax_2020 = c(4800, 4200, 5800, 3700),
+  Tax_2021 = c(5200, 3800, 5900, 3400)
+)
+
+# Calculate row-wise means using apply()
+row_means <- apply(tax_data[, -1], 1, mean)
+
+row_means
+```
+
+In this alternative solution, `apply()` is used with `tax_data[, -1]` as
+the first argument to specify the data frame from which the row-wise
+means should be calculated. The `1` argument indicates that the
+calculation should be performed on each row. Finally, `mean`
+is used as the third argument to specify the function to apply to each
+row. The result will be a vector of row means stored in the `row_means`
+variable.
+
 b)  Using ChatGPT try to understand what the rapply() function does.
     Create an easy example with mock data where the function is used and
     explain it in your words.
