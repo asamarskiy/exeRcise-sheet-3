@@ -319,6 +319,38 @@ b)  Using ChatGPT try to understand what the rapply() function does.
     Create an easy example with mock data where the function is used and
     explain it in your words.
 
+*Prompt*: Can you explain what the rapply() function does in R? Please
+illustrate with an example.
+
+*Response*: In a nutshell, the `rapply()` function in R is used to apply
+a given function to every element of a nested structure, such as a list.
+It recursively goes through each element, including nested elements, and
+performs the specified function on them.
+
+*Example (Comments mine)*:
+
+```{r}
+# ChatGPT created a list with two numbers and another list, also containing two numbers.
+numbers <- list(
+  1,
+  2,
+  nested_numbers = list(
+    3,
+    4
+  )
+)
+
+# We create the double function (*2 multiplication)
+double <- function(x) {
+  x * 2
+}
+
+#rapply permits us to double each number in the list, indepently of whether it is nested or not
+result <- rapply(numbers, double)
+
+print(result)
+```
+
 ## Final Note
 
 Make sure to push all your commits and changes to GitHub before
